@@ -27,21 +27,7 @@
 	</style>
 	<link rel="stylesheet" href="font-awesome/font-awesome/css/font-awesome.min.css">
 	<script>
-		<!-- (function($) {  	 -->
-			<!-- $.get = function(key)   {   -->
-				<!-- key = key.replace(/[\[]/, '\\[');   -->
-				<!-- key = key.replace(/[\]]/, '\\]');   -->
-				<!-- var pattern = "[\\?&]" + key + "=([^&#]*)";   -->
-				<!-- var regex = new RegExp(pattern);   -->
-				<!-- var url = unescape(window.location.href);   -->
-				<!-- var results = regex.exec(url);   -->
-				<!-- if (results === null) {   -->
-					<!-- return null;   -->
-				<!-- } else {   -->
-					<!-- return results[1];   -->
-				<!-- }   -->
-			<!-- }   -->
-		<!-- })(jQuery);   -->
+		
 		
 	</script>
 	<script src="js/jquery.min.js"></script>
@@ -49,7 +35,7 @@
 	<script src="js/scripts.js"></script>
 </head>
 
-<body class="signup-page" onload="init();" style="background-image: url('assets/img/city.JPG'); background-size: cover; background-position: top center;">
+<body class="signup-page"  style="background-image: url('assets/img/city.JPG'); background-size: cover; background-position: top center;">
 	<nav class="navbar navbar-transparent navbar-absolute">
     	<div class="container">
         	<!-- Brand and toggle get grouped for better mobile display -->
@@ -61,8 +47,7 @@
 		            <span class="icon-bar"></span>
         		</button>
         		<a class="navbar-brand" href="javascript:void();">
-					<!--<img src = 'http://ticketfacil.ec/ticket2/gfx/logo.png' style = 'width:100px;'/>-->
-					<!--<i class="material-icons" style="color:#9c27b0;">&#xE84F;</i>Cateyal-->
+					
 					<img src="assets/img/logoC.png" style="width:100px;">
 				</a>
         	</div>
@@ -73,27 +58,13 @@
                    
                     
                     <li class="active all" id="2">
-                       <!-- <a href="http://demos.creative-tim.com/material-dashboard-pro/examples/pages/login.html">-->
+                      
                         <a name="enlace" onclick = 'salir()' >
                             <i class="material-icons" style="color:#9c27b0;"></i> Salir
                         </a>
                     </li>
 					
-					<!--<li class="all" id="1"> 
-                        <a href="http://demos.creative-tim.com/material-dashboard-pro/examples/pages/register.html">
-                        <a name="enlace" onclick="reconfigura(1);">
-                            <i class="material-icons" style="color:#9c27b0;">person_add</i> Registrate
-                        </a>
-                    </li>-->
 					
-					
-                    <!--  
-					<li class="all" id = '3' >
-						<a href="http://demos.creative-tim.com/material-dashboard-pro/examples/pages/lock.html">
-                        <a href="#" onclick = 'reconfigura(3);'>
-                            <i class="material-icons">lock_open</i> Lock
-                        </a>
-                    </li>-->
                 </ul>
         	</div>
     	</div>
@@ -385,7 +356,7 @@
 							zoomCenter(1/2);
 							};
 
-							var onLoad = function () {
+							function onLoad() {
 
 							img = document.getElementById('pinch-zoom-image-id');
 							container = img.parentElement;
@@ -452,12 +423,12 @@
 							zoomAround(2, c.x, c.y);
 							});
 
-							};
+							}
 
 					  </script>
 						<center>
 							<div class="pinch-zoom-container">
-								<img src="http://www.lcodigo.com/cateyal_paginal/menu3.png	" alt="image" id="pinch-zoom-image-id" class="pinch-zoom-image img-rounded" onload = 'onLoad()' >
+								<img onload = 'onLoad()' src="http://www.lcodigo.com/cateyal_paginal/menu3.png	" alt="image" id="pinch-zoom-image-id" class="pinch-zoom-image img-rounded"  >
 							</div>
 						</center><br>
 					</div>
@@ -481,200 +452,7 @@
 		$(window).resize(function(){
 			saberTamanoVentana();
 		});
-		// Log events flag
-		var logEvents = false;
-
-		// Touch Point cache
-		var tpCache = new Array();
 		
-		
-		function set_handlers(name) {
-			// Install event handlers for the given element
-			var el=document.getElementById(name);
-			el.ontouchstart = start_handler;
-			el.ontouchmove = move_handler;
-			// Use same handler for touchcancel and touchend
-			el.ontouchcancel = end_handler;
-			el.ontouchend = end_handler;
-		}
-
-		function init() {
-			set_handlers("target1");
-			set_handlers("target2");
-			set_handlers("target3");
-			set_handlers("target4");
-		}
-		
-		
-		// This is a very basic 2-touch move/pinch/zoom handler that does not include
-		// error handling, only handles horizontal moves, etc.
-		function handle_pinch_zoom(ev) {
-
-			if (ev.targetTouches.length == 2 && ev.changedTouches.length == 2) {
-				// Check if the two target touches are the same ones that started
-				// the 2-touch
-				var point1=-1, point2=-1;
-				for (var i=0; i < tpCache.length; i++) {
-					if (tpCache[i].identifier == ev.targetTouches[0].identifier) point1 = i;
-					if (tpCache[i].identifier == ev.targetTouches[1].identifier) point2 = i;
-				}
-				if (point1 >=0 && point2 >= 0) {
-					// Calculate the difference between the start and move coordinates
-					var diff1 = Math.abs(tpCache[point1].clientX - ev.targetTouches[0].clientX);
-					var diff2 = Math.abs(tpCache[point2].clientX - ev.targetTouches[1].clientX);
-
-					// This threshold is device dependent as well as application specific
-					var PINCH_THRESHHOLD = ev.target.clientWidth / 10;
-					if (diff1 >= PINCH_THRESHHOLD && diff2 >= PINCH_THRESHHOLD)
-					ev.target.style.background = "green";
-					
-					
-					var tamano = $('#target1').width();
-					$('#coordenadas').html('target ' + PINCH_THRESHHOLD + ' <br/> tamaño de la imagen : ' + tamano + ' <br/> posicion dedo 1 : ' + point1 + ' <br/> posicion dedo 2 : ' + point2 + ' <br/> deferencia dedo 1 : ' + diff1 + ' <br/> diferencia dedo 2 : ' + diff2);
-					
-					if(point2 > point1 ){
-						$('#target1').css('width',(parseInt(tamano) + parseInt(30)));
-						$('#target1').css('border','2px solid red');
-					}else{
-						$('#target1').css('width',(parseInt(tamano) - parseInt(30)));
-						$('#target1').css('border','2px solid green');
-					}
-					
-					
-					
-				}
-				else {
-				// empty tpCache
-					
-					var tamano = $('#target1').width();
-					
-					
-					$('#coordenadas').html('tamaño de la imagen : ' + tamano + ' <br/> posicion dedo 1 : ' + point1 + ' <br/> posicion dedo 2 : ' + point2 + ' <br/> deferencia dedo 1 : ' + diff1 + ' <br/> diferencia dedo 2 : ' + diff2);
-					
-					
-					
-					tpCache = new Array();
-				}
-			}
-		}
-		
-		
-		function start_handler(ev) {
-			// If the user makes simultaneious touches, the browser will fire a 
-			// separate touchstart event for each touch point. Thus if there are 
-			// three simultaneous touches, the first touchstart event will have 
-			// targetTouches length of one, the second event will have a length 
-			// of two, and so on.
-			ev.preventDefault();
-			// Cache the touch points for later processing of 2-touch pinch/zoom
-			if (ev.targetTouches.length == 2) {
-				for (var i=0; i < ev.targetTouches.length; i++) {
-					tpCache.push(ev.targetTouches[i]);
-				}
-			}
-			if (logEvents) log("touchStart", ev, true);
-			update_background(ev);
-		}
-		
-		function move_handler(ev) {
-			// Note: if the user makes more than one "simultaneous" touches, most browsers 
-			// fire at least one touchmove event and some will fire several touchmoves.
-			// Consequently, an application might want to "ignore" some touchmoves.
-			//
-			// This function sets the target element's border to "dashed" to visually
-			// indicate the target received a move event.
-			//
-			ev.preventDefault();
-			if (logEvents) log("touchMove", ev, false);
-			// To avoid too much color flashing many touchmove events are started,
-			// don't update the background if two touch points are active
-			if (!(ev.touches.length == 2 && ev.targetTouches.length == 2))
-			update_background(ev);
-
-			// Set the target element's border to dashed to give a clear visual
-			// indication the element received a move event.
-			ev.target.style.border = "dashed";
-
-			// Check this event for 2-touch Move/Pinch/Zoom gesture
-			handle_pinch_zoom(ev);
-		}
-		
-		
-		function end_handler(ev) {
-			ev.preventDefault();
-			if (logEvents) log(ev.type, ev, false);
-			if (ev.targetTouches.length == 0) {
-				// Restore background and border to original values
-				ev.target.style.background = "white";
-				ev.target.style.border = "1px solid black";
-			}
-		}
-		
-		function update_background(ev) {
-			// Change background color based on the number simultaneous touches
-			// in the event's targetTouches list:
-			//   yellow - one tap (or hold)
-			//   pink - two taps
-			//   lightblue - more than two taps
-			switch (ev.targetTouches.length) {
-				case 1:
-				// Single tap`
-				<!-- ev.target.style.background = "yellow"; -->
-				break;
-				case 2:
-				// Two simultaneous touches
-				<!-- ev.target.style.background = "pink"; -->
-				break;
-				default:
-				// More than two simultaneous touches
-				<!-- ev.target.style.background = "lightblue"; -->
-			}
-		}
-		
-		
-		function enableLog(ev) {
-			logEvents = logEvents ? false : true;
-		}
-
-		function log(name, ev, printTargetIds) {
-			var o = document.getElementsByTagName('output')[0];
-			var s = name + ": touches = " + ev.touches.length + " ; targetTouches = " + ev.targetTouches.length + " ; changedTouches = " + ev.changedTouches.length;
-			o.innerHTML += s + " ";
-
-			if (printTargetIds) {
-				s = "";
-				for (var i=0; i < ev.targetTouches.length; i++) {
-					s += "... id = " + ev.targetTouches[i].identifier + " ";
-				}
-				o.innerHTML += s;
-			}
-		} 
-
-		function clearLog(event) {
-			var o = document.getElementsByTagName('output')[0];
-			o.innerHTML = "";
-		}
-		
-		function cambiarTamano(ident){
-			
-			if(ident == 1){
-				var anchoImg = $('#target1').width();
-				var altoImg = $('#target1').height();
-				
-				$('#target1').css('width',(parseInt(anchoImg) - parseInt(10)))
-				$('#target1').css('height',(parseInt(altoImg) - parseInt(10)))
-				
-			}else if(ident == 2){
-				
-				var anchoImg2 = $('#target1').width();
-				var altoImg2 = $('#target1').height();
-				<!-- alert(parseInt(anchoImg2) +'+'+ parseInt(10)) -->
-				$('#target1').css('width',(parseInt(anchoImg2) + parseInt(10)))
-				$('#target1').css('height',(parseInt(altoImg2) + parseInt(10)))
-			}
-			
-			<!-- alert(anchoImg + ' << >> ' + altoImg) -->
-		}
 	</script>
 	
 	
@@ -755,17 +533,7 @@
 						<input id="image" type="file">
 					</div>
 					</div>
-					<!--<i class="fa fa-qrcode fa-5x" aria-hidden="true"></i>-->
-					<!--<div id="qrdiv">
-					    
-					  <form name="qrinp" style = "display:none;">
-					    <input type="button" value="Go"/>
-					    ECC Level (1-4)
-					    <input type="numeric" name="ECC" value="1" size="1"><br>
-					    Text:<textarea name="qrinput" size=2953>Hello World!</textarea><br>
-					  </form>
-					    <canvas id="qrcanv"/>No Canvas Support?
-					</div>-->
+					
 				</div>
 				<div class="modal-footer">
 					
@@ -783,7 +551,7 @@
 					<h4 class="modal-title">TIPS NUTRICIONALES</h4>
 				</div>
 				<div class="modal-body" id = 'recibeTips'>
-					<!--<iframe src = 'http://www.lcodigo.com/cateyal_paginal/tips.php' frameborder = '0' width = '100%' height = '430px' ></iframe>-->
+					
 					<h4><b>Importancia de una buena nutrición en niños</b></h4>
 						<p>Una adecuada nutrición es primordial para los 
 					niños, ya que están en etapa de crecimiento y 
