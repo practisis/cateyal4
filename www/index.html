@@ -201,14 +201,7 @@
 				$('#username').attr('placeholder','cedula invalida');
 				$('#username').focus('');
 			}
-			
-			<!-- else if(largoCadena < 10 ){ -->
-				<!-- $('#username').focus(''); -->
-				<!-- $('#username').val(''); -->
-				<!-- $('#password').attr('disabled',true); -->
-				<!-- $('#username').attr('placeholder','la cedula debe tener 10 digitos'); -->
-				
-			<!-- } -->
+		
 		})
 		
 		
@@ -232,46 +225,52 @@
 				}
 				
 				if(p == ''){
-					$('#username').attr('placeholder','ingrese los 4 ultimos digitos de su cedula');
+					$('#username').attr('placeholder','ingrese el codigo');
 				}
 				
 				
 				if(e == '' || p == ''){
 					
 				}else{
+				
+					$('#candado').css('color','#555');
+					$('#ya_logueado').html('<i class="fa fa-spinner" aria-hidden="true"></i> ESPERE!!!');
+					
+					$.post("https://www.practisis.online/cateyal/cateyalApp/login.php",{ 
+						e : e , p : p
+					}).done(function(data){
+						var rs = data.split('|');
+						if(rs[0] == 'ok'){
+							var rs2 = rs[1];
+							var rs3 = rs2.split('@');
+							
+							var cedula = rs3[0];
+							var nombre = rs3[1];
+							var apellido = rs3[2];
+							var codigo = rs3[3];
+							
+							window.location = 'pagina1.html?cedula='+cedula+'&nombre='+nombre+'&apellido='+apellido+'&codigo='+codigo;
+						}else{
+							alert('la cedula , pasaporte o codigo ingresado no consta en nuestra base de datos , verifique y vuelva a intentar');
+							$('#ya_logueado').html('Ingresar');
+							
+							$('#username').val('');
+							$('#password').val('');
+						}
+					});
+					
 					<!-- alert(p +' <<   >> '+ res); -->
-					if(p != res){
+					<!-- if(p != res){ -->
 						
-						$('#password').val('');
-						$('#password').attr('placeholder','los 4 digitos no corresponden');
-						$('#ya_logueado').html('Ingresar');
-						$('#candado').css('color','red')
-						<!-- alert('los 4 digitos no corresponden'); -->
-					}else{
-						$('#candado').css('color','#555');
-						$('#ya_logueado').html('Ingresar');
+						<!-- $('#password').val(''); -->
+						<!-- $('#password').attr('placeholder','los 4 digitos no corresponden'); -->
+						<!-- $('#ya_logueado').html('Ingresar'); -->
+						<!-- $('#candado').css('color','red') -->
+						<!-- <!-- alert('los 4 digitos no corresponden'); --> -->
+					<!-- }else{ -->
 						
-						$.post("https://www.practisis.online/cateyal/cateyalApp/login.php",{ 
-							e : e 
-						}).done(function(data){
-							var rs = data.split('|');
-							if(rs[0] == 'ok'){
-								var rs2 = rs[1];
-								var rs3 = rs2.split('@');
-								
-								var cedula = rs3[0];
-								var nombre = rs3[1];
-								var apellido = rs3[2];
-								var codigo = rs3[3];
-								
-								window.location = 'pagina1.html?cedula='+cedula+'&nombre='+nombre+'&apellido='+apellido+'&codigo='+codigo;
-							}else{
-								alert('la cedula o pasaporte ingresado no consta en nuestra base de datos');
-							}
-						});
-						
-						<!-- window.location = 'pagina1.html?cedula='+e; -->
-					}
+						<!-- <!-- window.location = 'pagina1.html?cedula='+e; --> -->
+					<!-- } -->
 				}
 				
 			}
