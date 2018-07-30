@@ -211,7 +211,9 @@
 					<h4 class="modal-title">Código QR</h4>
 				</div>
 				<div class="modal-body" style ="background-color: #fff;text-align: center">
-					<div id="container"></div>
+					<center>
+						<div id="container"></div>
+					</center>
 					
 					<div style = 'display:none;'>
 						<div class="control left">
@@ -219,13 +221,13 @@
 						<hr>
 						<label for="render">RENDER MODE</label>
 						<select id="render">
-							<option value="canvas" selected="selected">canvas</option>
+							<option value="canvas" >canvas</option>
 							<option value="image">image</option>
-							<option value="div">div</option>
+							<option value="div" selected="selected">div</option>
 						</select>
 						<hr>
 						<label for="size">SIZE:</label>
-						<input id="size" type="range" value="400" min="100" max="1000" step="50">
+						<input id="size" type="range" value="650" min="100" max="1000" step="50">
 						<label for="fill">FILL</label><input id="fill" type="color" value="#333333">
 						<label for="background">BACKGROUND</label>
 						<input id="background" type="color" value="#ffffff">
@@ -455,3 +457,4 @@
 		}
 	</script>
 </html>
+ 
