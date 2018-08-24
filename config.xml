@@ -54,4 +54,5 @@
     <gap:splash gap:platform="ios" height="768" src="www/assets/img/logoC.png" width="1024" />
     <gap:splash gap:platform="winphone" src="www/assets/img/logoC.png"/>
 	<access origin="*" />
+	<engine name="android" spec="~4.1.1" />
 </widget>
