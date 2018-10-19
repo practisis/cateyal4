@@ -60,4 +60,5 @@
 		</platform>
 	<access origin="*" />
 	<engine name="android" spec="~4.1" />
+	<splash src="ios/Default-568h@2x.png" platform="ios" width="640" height="1136" />
 </widget>
